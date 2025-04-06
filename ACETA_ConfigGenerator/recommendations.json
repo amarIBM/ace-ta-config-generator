@@ -1,0 +1,158 @@
+{
+  "domain": "Integration",
+  "collectionUnitType": "Bar",
+  "collectionUnitName": "TCPIP_connection_03_override_1.bar",
+  "middleware": "",
+  "version": "",
+  "complexityRules": [
+    {
+      "id": "admintasksimple",
+      "name": "Simple Administrator Task",
+      "description": "Issues with a SIMPLE complexity rating can be resolved by making administration changes:",
+      "complexityContribution": "simple",
+      "issuesCategory": [
+        "admintasksimple"
+      ]
+    },
+    {
+      "id": "devtaskmoderate",
+      "name": "Moderate Developer Task",
+      "description": "Issues with a MODERATE complexity rating can be resolved by making development changes:",
+      "complexityContribution": "moderate",
+      "issuesCategory": [
+        "devtaskmoderate"
+      ]
+    },
+    {
+      "id": "devtaskcomplex",
+      "name": "Complex Developer Task",
+      "description": "Issues with a COMPLEX complexity rating can be resolved by making significant development changes or by choosing an alternate technology:",
+      "complexityContribution": "complex",
+      "issuesCategory": [
+        "devtaskcomplex"
+      ]
+    }
+  ],
+  "issueCategories": {
+    "admintasksimple": {
+      "title": "Issues with a SIMPLE complexity rating can be resolved by making administration changes:"
+    },
+    "devtaskcomplex": {
+      "title": "Issues with a COMPLEX complexity rating can be resolved by making significant development changes or by choosing an alternate technology:"
+    },
+    "devtaskmoderate": {
+      "title": "Issues with a MODERATE complexity rating can be resolved by making development changes:"
+    }
+  },
+  "assessmentUnits": [
+    {
+      "name": "TCPIP_connection_03_override_1",
+      "targets": [
+        {
+          "target": "ACE Containers",
+          "issues": {
+            "admintasksimple": [
+              {
+                "id": "IIB16",
+                "title": "A TCPIPServer message flow node was found. Consider altering the configuration of your containers to open the required TCPIP port.",
+                "cost": 2.0,
+                "issueOverhead": 1.0,
+                "occurrencesCost": 1.0,
+                "complexityRule": "admintasksimple",
+                "solutionText": [
+                  "The message flow contains an instance of a TCPIPServer message flow node.",
+                  "Consider changing your IntegrationServer custom resource values for spec.service.ports to include your TCP/IP Ports."
+                ],
+                "severity": "suggested",
+                "occurrencesFields": {
+                  "app": "Application",
+                  "sharedLibName": "Shared Library",
+                  "staticLibName": "Static Library",
+                  "subFlow": "Sub Flow",
+                  "messageFlow": "Message Flow",
+                  "flowNode": "Message Flow Node"
+                },
+                "occurrencesCount": 1,
+                "occurrences": [
+                  {
+                    "app": "TCPIP_connection_03",
+                    "sharedLibName": "",
+                    "staticLibName": "",
+                    "subFlow": "",
+                    "messageFlow": "flow1",
+                    "flowNode": "TCPIP Server Input"
+                  }
+                ]
+              },
+              {
+                "id": "IIB19",
+                "title": "An MQInput, MQOutput, or MQGet message flow node using server bindings to a queue manager was found. You might want to consider changing this when you move to containers.",
+                "cost": 4.0,
+                "issueOverhead": 1.0,
+                "occurrencesCost": 1.0,
+                "complexityRule": "admintasksimple",
+                "solutionText": [
+                  "The message flow contains an instance of an MQ node that uses server bindings.",
+                  "You might want to consider changing to use IBM MQ Client bindings when you move to containers so that you can use smaller containers.",
+                  "Independently scaling the integration servers in your architecture from your queue managers is more easily achieved if you use client bindings rather than server bindings."
+                ],
+                "severity": "potential",
+                "occurrencesFields": {
+                  "app": "Application",
+                  "sharedLibName": "Shared Library",
+                  "staticLibName": "Static Library",
+                  "subFlow": "Sub Flow",
+                  "messageFlow": "Message Flow",
+                  "flowNode": "Message Flow Node"
+                },
+                "occurrencesCount": 3,
+                "occurrences": [
+                  {
+                    "app": "TCPIP_connection_03",
+                    "sharedLibName": "",
+                    "staticLibName": "",
+                    "subFlow": "",
+                    "messageFlow": "flow1",
+                    "flowNode": "CLIENT_FAILURE"
+                  },
+                  {
+                    "app": "TCPIP_connection_03",
+                    "sharedLibName": "",
+                    "staticLibName": "",
+                    "subFlow": "",
+                    "messageFlow": "flow1",
+                    "flowNode": "SERVER_CATCH"
+                  },
+                  {
+                    "app": "TCPIP_connection_03",
+                    "sharedLibName": "",
+                    "staticLibName": "",
+                    "subFlow": "",
+                    "messageFlow": "flow1",
+                    "flowNode": "SERVER_FAILURE"
+                  }
+                ]
+              }
+            ]
+          },
+          "summary": {
+            "complexity": {
+              "simple": {
+                "admintasksimple": 1
+              },
+              "score": "simple"
+            },
+            "issues": {
+              "suggested": 1,
+              "potential": 1
+            },
+            "effort": {
+              "admintasksimple": 6.0,
+              "total": 6.0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
